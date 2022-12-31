@@ -200,7 +200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4096d47560ee4a3469aaa95e1efbffb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 4632857792097805202, guid: 56c2b51d0c69a4c46a5ed5ec92186b9c, type: 3}
+  enemyPrefab: {fileID: 4632857792097805202, guid: 56c2b51d0c69a4c46a5ed5ec92186b9c, type: 3}
+  enemys: []
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,7 +300,7 @@ GameObject:
   - component: {fileID: 673503359}
   m_Layer: 0
   m_Name: bgGame@2
-  m_TagString: Untagged
+  m_TagString: BG
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -859,6 +860,7 @@ MonoBehaviour:
   jump: 500
   gravity: 2.5
   feathersParticles: {fileID: 8271278807177923536, guid: e48118a8a506aae4391209b53e926433, type: 3}
+  myGameController: {fileID: 258403038}
 --- !u!60 &2133658886
 PolygonCollider2D:
   m_ObjectHideFlags: 0

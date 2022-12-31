@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     private bool finish = false;
     private Rigidbody2D playerbody;
     private Vector2 impulse;
+
+    public GameController myGameController;
   
     void Start()
     {
@@ -32,6 +34,7 @@ public class Player : MonoBehaviour
                 {
                    playerbody.gravityScale = gravity;
                    start = true;
+                   //myGameController.GameStart();
                 }
 
                 playerbody.velocity = new Vector2(0,0);
@@ -69,6 +72,7 @@ public class Player : MonoBehaviour
             GetComponent<Rigidbody2D>().AddForce(new Vector2(200,-10));
             GetComponent<Rigidbody2D>().AddTorque(300f);
             GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.5f, 0.5f);
+            myGameController.GameOver();
         
         }
     }
