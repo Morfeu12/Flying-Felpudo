@@ -79,8 +79,8 @@ public class GameController : MonoBehaviour
         if (gameover) {
             playAgainPanel.SetActive(true);
             pressStart.text = "Touch for Play again";
-            pressStart.transform.position = new Vector2(Screen.width/2,Screen.height/2 - 75);
-            textScore.transform.position  = new Vector2(Screen.width/2,Screen.height/2 + 75);
+            pressStart.transform.position = new Vector2(Screen.width/2,Screen.height/2 - 50);
+            textScore.transform.position  = new Vector2(Screen.width/2,Screen.height/2 + 40);
             textScore.fontSize = 100;
 
         }
