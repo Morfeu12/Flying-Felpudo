@@ -7,7 +7,11 @@ public class Player : MonoBehaviour
     [Header("Player Settings")]
     public float jump = 500f;
     public float gravity = 2.5f;
-    public GameObject feathersParticles;
+    public GameObject touchParticles;
+    public GameObject impactParticles;
+    private AudioSource sound_collision;
+    private AudioSource sound_impulse;
+
     
     private bool start = false;
     private bool finish = false;
@@ -19,6 +23,9 @@ public class Player : MonoBehaviour
     void Start()
     {
        playerbody = GetComponent<Rigidbody2D>();
+       sound_impulse = GameObject.Find("Sounds/Impulse").GetComponent<AudioSource>();
+       sound_collision = GameObject.Find("Sounds/Collision").GetComponent<AudioSource>();
+       
        impulse = new Vector2(0,jump);
         
     }
@@ -36,12 +43,13 @@ public class Player : MonoBehaviour
                    start = true;
                    //myGameController.GameStart();
                 }
+                sound_impulse.Play();
 
                 playerbody.velocity = new Vector2(0,0);
                 playerbody.AddForce(impulse);
             
-                GameObject featherAnim = Instantiate(feathersParticles);
-                featherAnim.transform.position = this.transform.position;
+                GameObject featherAnim = Instantiate(touchParticles);
+                featherAnim.transform.position = new Vector3(this.transform.position.x, this.transform.position.y +1f, this.transform.position.z +3);
             }
             transform.rotation = Quaternion.Euler(0,0,playerbody.velocity.y * 3);
         }
@@ -67,6 +75,9 @@ public class Player : MonoBehaviour
         if (!finish)
         {
             finish = true;
+            GameObject impactAnim = Instantiate(impactParticles);
+            sound_collision.Play();
+            impactAnim.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z -3);
             GetComponent<Collider2D>().enabled = false;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             GetComponent<Rigidbody2D>().AddForce(new Vector2(200,-10));

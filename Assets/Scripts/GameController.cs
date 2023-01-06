@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour
         if(!gameover) {
             CheckPoints();
         } else if (gameover) {
-            Invoke("PlayAgain", 1.5f);
+            Invoke("PlayAgain", 0.3f);
         }
         CanvasGUI();
     }
@@ -67,7 +67,7 @@ public class GameController : MonoBehaviour
 
     private void CanvasGUI() {
         if (!gamestart) {
-            if(Input.GetButtonDown("Fire1") || Input.GetKeyDown("space") ) {       
+            if(Input.GetButtonDown("Fire1") || Input.GetKeyDown("space") || Input.GetKeyDown("return")) {       
                 playAgainPanel.SetActive(false);
                 pressStart.text = "";
                 InvokeRepeating("RespawnEnemys", 1.0f, 1.5f);
@@ -87,7 +87,7 @@ public class GameController : MonoBehaviour
     }
 
     private void PlayAgain() {
-        if(Input.GetButtonDown("Fire1") || Input.GetKeyDown("space") ) { 
+        if(Input.GetButtonDown("Fire1") || Input.GetKeyDown("space") || Input.GetKeyDown("return") ) { 
             SceneManager.LoadScene("Game", LoadSceneMode.Single);
         }
     }
