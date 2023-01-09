@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     public GameObject impactParticles;
     private AudioSource sound_collision;
     private AudioSource sound_impulse;
+    private AudioSource sound_airplane;
+    private AudioSource sound_airplane_down;
 
     
     private bool start = false;
@@ -20,14 +22,16 @@ public class Player : MonoBehaviour
 
     public GameController myGameController;
   
-    void Start()
-    {
+    private void Awake() {
        playerbody = GetComponent<Rigidbody2D>();
+       impulse = new Vector2(0,jump);   
+    }
+    
+    void Start() {
        sound_impulse = GameObject.Find("Sounds/Impulse").GetComponent<AudioSource>();
        sound_collision = GameObject.Find("Sounds/Collision").GetComponent<AudioSource>();
-       
-       impulse = new Vector2(0,jump);
-        
+       sound_airplane = GameObject.Find("Sounds/Airplane").GetComponent<AudioSource>();
+       sound_airplane_down = GameObject.Find("Sounds/AirplaneDown").GetComponent<AudioSource>();
     }
 
     
@@ -84,6 +88,9 @@ public class Player : MonoBehaviour
             GetComponent<Rigidbody2D>().AddTorque(300f);
             GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.5f, 0.5f);
             myGameController.GameOver();
+            sound_airplane.Stop();
+            sound_airplane_down.Play();
+
         
         }
     }

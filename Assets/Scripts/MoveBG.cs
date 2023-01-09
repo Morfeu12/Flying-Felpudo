@@ -8,13 +8,14 @@ public class MoveBG : MonoBehaviour
     private float imgHeight;
     private float screenHeight;
     private float screenWidth;
+    private float fixBgDistance = 4f;
     
     void Start()
     {
-        BackgroundOnScreen();
+       BackgroundOnScreen();
         if(this.name == "bgGame@2")
         {
-            transform.position = new Vector2(screenWidth, 0f);
+            transform.position = new Vector2(screenWidth + (imgWidth-screenWidth)/fixBgDistance, 0f);
         }
         
     }
@@ -31,6 +32,7 @@ public class MoveBG : MonoBehaviour
         SpriteRenderer grafic = GetComponent<SpriteRenderer>();
 
         imgWidth  = grafic.sprite.bounds.size.x;
+        
         imgHeight = grafic.sprite.bounds.size.y;
 
         // OrthographicSize get /2 size screen
@@ -41,6 +43,11 @@ public class MoveBG : MonoBehaviour
         newScale.x = screenWidth / imgWidth + 0.1f;
         newScale.y = screenHeight / imgHeight;
         this.transform.localScale = newScale; 
+
+        //print("Img H"+imgHeight.ToString());
+        //print("Img W"+imgWidth.ToString());
+        //print("Scre H"+screenHeight.ToString());
+        //print("Scre W"+screenWidth.ToString());
         
     }
 
@@ -48,13 +55,15 @@ public class MoveBG : MonoBehaviour
     {
         // -3 is the velocity the BG move
         // Off(0) gravity at inpector 
-        GetComponent<Rigidbody2D>().velocity = new Vector2(-3,0);
+        GetComponent<Rigidbody2D>().velocity = new Vector2(-2f,0);
 
         
-        
-        if(transform.position.x <= -screenWidth)
+        //print("BG: "+ transform.position.x.ToString());
+        //print("Tela: "+ (-screenWidth).ToString());
+        if(transform.position.x <= -screenWidth - (imgWidth-screenWidth)/fixBgDistance)
         {
-            transform.position = new Vector2(screenWidth, 0f);
+
+            transform.position = new Vector2(screenWidth + (imgWidth-screenWidth)/fixBgDistance, 0f);
 
         }
     }

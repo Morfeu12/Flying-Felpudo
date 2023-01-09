@@ -13,10 +13,33 @@ public class GameController : MonoBehaviour
     private GameObject playAgainPanel;
     private Text pressStart;
     private Text textScore;
-    private int score;
-    private bool gamestart = false;
-    private bool gameover = false;
+    // [System.NonSerialized] public int score; //Not visible in Inspector
+    
+    //[System.NonSerialized] public bool gameover = false;
+    //[System.NonSerialized] public bool gamestart = false;
+    private static int score;
+    private static bool gameover;
+    private static bool gamestart;
 
+    private float enemySpeed = -4;
+
+    public static int GetScore {
+        get { return score; }
+    }
+    
+    public static bool GetGameStart {
+        get { return gamestart;}
+    }
+
+    public static bool GetGameOver {
+        get { return gameover;}
+    }
+    
+    private void Awake() {
+        score = 0;
+        gameover = false;
+        gamestart = false;
+    }
     
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -45,12 +68,17 @@ public class GameController : MonoBehaviour
             GameObject newEnemy = Instantiate(enemyPrefab);
             newEnemy.transform.position = new Vector2(15.0f, heightRandom);
             enemys.Add(newEnemy);
+            EnemyVelocity();
         }
 
     }
 
     public void CheckPoints(){
-
+        if (score % 3 == 0 && score > 0) {
+            enemySpeed = enemySpeed - 0.1f/275;
+            print(enemySpeed.ToString());
+        }
+        
         foreach (var enemy in enemys.ToArray())
         {
             if(enemy != null){
@@ -58,11 +86,16 @@ public class GameController : MonoBehaviour
                     enemys.Remove(enemy);
                     score++;
                 }
-
             }
+        } 
+    }
 
-        }
+    private void EnemyVelocity(){
         
+        foreach (var enemy in enemys.ToArray())
+        {
+            enemy.GetComponent<Rigidbody2D>().velocity = new Vector2(enemySpeed,0);
+        }
     }
 
     private void CanvasGUI() {
@@ -96,6 +129,21 @@ public class GameController : MonoBehaviour
     public void GameOver() {
         gameover = true;
     }
+
+    /*public GameController(string getType) {
+        switch (getType)
+        {
+            case "score":
+                return score;
+            case "gameover":
+                return gameover;
+            case "gamestart":
+                return gamestart;
+            default:
+                break;
+        } 
+    }*/
+
 
 
     
