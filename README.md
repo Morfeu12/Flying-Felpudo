@@ -7,7 +7,7 @@ Flying with Fuzzy is a 2D Flappy Bird style game with the character Fuzzy flying
 Game designer credit and assets to @Tito Petri and @Thiago Travi.
 
 ### Screenshots
-![Screenshot](https://github.com/Morfeu12/assets/blob/main/FlyingFelpudo/0.png)
+![Screenshot](https://github.com/Morfeu12/assets/blob/main/FlyingFelpudo/0.jpg)
 
 
 ## Templete
