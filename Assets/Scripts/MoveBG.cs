@@ -8,14 +8,14 @@ public class MoveBG : MonoBehaviour
     private float imgHeight;
     private float screenHeight;
     private float screenWidth;
-    private float fixBgDistance = 4f;
+    
     
     void Start()
     {
        BackgroundOnScreen();
         if(this.name == "bgGame@2")
         {
-            transform.position = new Vector2(screenWidth + (imgWidth-screenWidth)/fixBgDistance, 0f);
+            transform.position = new Vector2(screenWidth, 0f);
         }
         
     }
@@ -31,7 +31,7 @@ public class MoveBG : MonoBehaviour
         
         SpriteRenderer grafic = GetComponent<SpriteRenderer>();
 
-        imgWidth  = grafic.sprite.bounds.size.x;
+        imgWidth  = grafic.sprite.bounds.size.x - 0.1f;
         
         imgHeight = grafic.sprite.bounds.size.y;
 
@@ -40,7 +40,7 @@ public class MoveBG : MonoBehaviour
         screenWidth = screenHeight / Screen.height * Screen.width;
 
         Vector2 newScale = transform.localScale;
-        newScale.x = screenWidth / imgWidth + 0.1f;
+        newScale.x = screenWidth / imgWidth;
         newScale.y = screenHeight / imgHeight;
         this.transform.localScale = newScale; 
 
@@ -60,10 +60,10 @@ public class MoveBG : MonoBehaviour
         
         //print("BG: "+ transform.position.x.ToString());
         //print("Tela: "+ (-screenWidth).ToString());
-        if(transform.position.x <= -screenWidth - (imgWidth-screenWidth)/fixBgDistance)
+        if(transform.position.x <= -screenWidth)
         {
 
-            transform.position = new Vector2(screenWidth + (imgWidth-screenWidth)/fixBgDistance, 0f);
+            transform.position = new Vector2(screenWidth, 0f);
 
         }
     }
